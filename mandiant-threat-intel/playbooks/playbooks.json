@@ -1,0 +1,427 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Mandiant Threat Intelligence - 1.0.0",
+      "description": null,
+      "visible": true,
+      "image": null,
+      "uuid": "49025b96-0a8d-4f68-b407-df7f938fd79c",
+      "id": 354,
+      "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+      "createDate": 1655974364.355894,
+      "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+      "modifyDate": 1655974364.355894,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Search Collections",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves collections from Mandiant Threat Intel based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1655974647,
+          "collection": "/api/3/workflow_collections/49025b96-0a8d-4f68-b407-df7f938fd79c",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3260c435-1674-47a9-8ea7-791b639e7d83",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Collections",
+              "description": null,
+              "arguments": {
+                "name": "Mandiant Threat Intelligence",
+                "config": "",
+                "params": {
+                  "queries": "",
+                  "sort_by": "",
+                  "sort_order": "",
+                  "connected_objects": "",
+                  "include_connected_objects": false
+                },
+                "version": "1.0.0",
+                "connector": "mandiant-threat-intel",
+                "operation": "search_collections",
+                "operationTitle": "Search Collections",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "27b27c1d-a604-4798-a706-c8b1d32720c3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "443cb0ba-e71f-46cd-96fe-053cf8c1820d",
+                "title": "Mandiant Threat Intelligence: Search Collections",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "3260c435-1674-47a9-8ea7-791b639e7d83"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Search Collections",
+              "targetStep": "/api/3/workflow_steps/27b27c1d-a604-4798-a706-c8b1d32720c3",
+              "sourceStep": "/api/3/workflow_steps/3260c435-1674-47a9-8ea7-791b639e7d83",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "52c9dd82-8855-45af-8585-9eaee9d8e374"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "2becdb98-4c00-4584-b692-d46d0d285438",
+          "id": 3068,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1655974578.950974,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1655974641.822247,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "mandiant-threat-intel"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Reports",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves reports from Mandiant Threat Intel based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1655974507,
+          "collection": "/api/3/workflow_collections/49025b96-0a8d-4f68-b407-df7f938fd79c",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c5f45d79-5ff1-419a-93b7-e02ab10fee69",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "d8257aaf-2b62-48d0-8765-b7db44a3b8a9",
+                "title": "Mandiant Threat Intelligence: Get Reports",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c5f45d79-5ff1-419a-93b7-e02ab10fee69"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Reports",
+              "description": null,
+              "arguments": {
+                "name": "Mandiant Threat Intelligence",
+                "config": "",
+                "params": {
+                  "length": 50,
+                  "status": "",
+                  "report_id": "",
+                  "actor_name": "",
+                  "added_after": "",
+                  "document_id": "",
+                  "report_type": "",
+                  "malware_name": "",
+                  "subscription": ""
+                },
+                "version": "1.0.0",
+                "connector": "mandiant-threat-intel",
+                "operation": "get_reports",
+                "operationTitle": "Get Reports",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "cc7619a9-fe5f-4b70-84cd-1b1b46845448"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Reports",
+              "targetStep": "/api/3/workflow_steps/cc7619a9-fe5f-4b70-84cd-1b1b46845448",
+              "sourceStep": "/api/3/workflow_steps/c5f45d79-5ff1-419a-93b7-e02ab10fee69",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "cbce82f1-47c2-468b-aa76-ad6fee338513"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "49fee998-d723-4519-97fb-28652c4037f6",
+          "id": 3066,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1655974467.379373,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1655974502.078506,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "mandiant-threat-intel"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Alerts",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves alerts from Mandiant Threat Intel based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1655974561,
+          "collection": "/api/3/workflow_collections/49025b96-0a8d-4f68-b407-df7f938fd79c",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ff3436f2-1c0f-412a-a51b-620a9b5a7b6d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Alerts",
+              "description": null,
+              "arguments": {
+                "name": "Mandiant Threat Intelligence",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "length": 50,
+                  "alert_type": "",
+                  "added_after": "",
+                  "alert_status": "",
+                  "alert_severity": "",
+                  "alert_categories": ""
+                },
+                "version": "1.0.0",
+                "connector": "mandiant-threat-intel",
+                "operation": "get_alerts",
+                "operationTitle": "Get Alerts",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "40ea86ac-dbee-42d5-93b2-045070572d3d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "1ba03169-4aee-4f21-a89b-a79c5f239912",
+                "title": "Mandiant Threat Intelligence: Get Alerts",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ff3436f2-1c0f-412a-a51b-620a9b5a7b6d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Alerts",
+              "targetStep": "/api/3/workflow_steps/40ea86ac-dbee-42d5-93b2-045070572d3d",
+              "sourceStep": "/api/3/workflow_steps/ff3436f2-1c0f-412a-a51b-620a9b5a7b6d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b95f3eef-ff7c-408c-872d-15c76e263d7c"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "5a61c10b-20e5-40d7-87fd-5a069a1e63ad",
+          "id": 3067,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1655974523.945318,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1655974556.482959,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "mandiant-threat-intel"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Indicators",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves indicators from Mandiant Threat Intel based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1655974443,
+          "collection": "/api/3/workflow_collections/49025b96-0a8d-4f68-b407-df7f938fd79c",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0bf48ca9-fca7-404f-9d9b-ec689653d2ec",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4c6c87a2-60d9-47fe-ad8f-9e8ab21c622d",
+                "title": "Mandiant Threat Intelligence: Get Indicators",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "0bf48ca9-fca7-404f-9d9b-ec689653d2ec"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Indicators",
+              "description": null,
+              "arguments": {
+                "name": "Mandiant Threat Intelligence",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "length": 50,
+                  "status": "",
+                  "added_after": ""
+                },
+                "version": "1.0.0",
+                "connector": "mandiant-threat-intel",
+                "operation": "get_indicators",
+                "operationTitle": "Get Indicators",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b8208668-8717-4472-9204-aa73154f2b8a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Indicators",
+              "targetStep": "/api/3/workflow_steps/b8208668-8717-4472-9204-aa73154f2b8a",
+              "sourceStep": "/api/3/workflow_steps/0bf48ca9-fca7-404f-9d9b-ec689653d2ec",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2712ba57-c903-49bf-8ffa-078f9f16a37f"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "601f5f81-f27f-413c-b04e-5dc36210a7a3",
+          "id": 3065,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1655974403.103521,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1655974438.027677,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "mandiant-threat-intel"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "mandiant-threat-intel"
+  ]
+}

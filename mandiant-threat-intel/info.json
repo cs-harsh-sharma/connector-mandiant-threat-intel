@@ -1,0 +1,403 @@
+{
+  "name": "mandiant-threat-intel",
+  "version": "1.0.0",
+  "label": "Mandiant Threat Intelligence",
+  "category": "Threat Intelligence",
+  "description": "",
+  "publisher": "Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "help_online": "",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "ingestion_supported": false,
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "server",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "The service-based URI to which you will connect and perform the automated operations.",
+        "value": "https://api.intelligence.fireeye.com"
+      },
+      {
+        "title": "Public Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "public_key",
+        "description": "Unique Public Key of the Mandiant Threat Intel that is used to create an authentication token required to access the Mandiant Threat Intel API."
+      },
+      {
+        "title": "Private Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "private_key",
+        "description": "Unique Private Key of the Mandiant Threat Intel that is used to create an authentication token required to access the Mandiant Threat Intel API."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_indicators",
+      "category": "investigation",
+      "annotation": "get_indicators",
+      "description": "Retrieves indicators from Mandiant Threat Intel based on the input parameters you have specified.",
+      "title": "Get Indicators",
+      "parameters": [
+        {
+          "title": "Created At",
+          "name": "added_after",
+          "description": "Created datetime from when you want to retrieve indicators from Mandiant Threat Intel.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Size",
+          "name": "length",
+          "description": "Number of results that you want this operation to return, per page, in the response. The maximum number of results per page is set items to 50.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Value should be between 1 to 1000.",
+          "value": 50
+        },
+        {
+          "title": "STIX UUID",
+          "name": "id",
+          "description": "STIX ID of the alert object based on which you want to retrieve indicators from Mandiant Threat Intel.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "description": "Filters on whether the indicator is in an active state or has been revoked.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Active",
+            "Revoked"
+          ]
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "get_reports",
+      "category": "investigation",
+      "annotation": "get_reports",
+      "description": "Retrieves reports from Mandiant Threat Intel based on the input parameters you have specified.",
+      "title": "Get Reports",
+      "parameters": [
+        {
+          "title": "Created At",
+          "name": "added_after",
+          "description": "Created datetime from when you want to retrieve indicators from Mandiant Threat Intel.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Size",
+          "name": "length",
+          "description": "Number of results that you want this operation to return, per page, in the response. The maximum number of results per page is set items to 50.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Value should be between 1 to 1000.",
+          "value": 50
+        },
+        {
+          "title": "Report ID",
+          "name": "report_id",
+          "description": "STIX ID of the alert object based on which you want to retrieve indicators from Mandiant Threat Intel.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": "e.g report--5e55ad2e-803e-54b0-94d7-2b5bc2aac4a0"
+        },
+        {
+          "title": "Document ID",
+          "name": "document_id",
+          "description": "Filters this operation to a single report using the reportID",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": "e.g 20-00000710"
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "description": "Filters on whether the reports is in an active state or has been revoked.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Active",
+            "Revoked"
+          ]
+        },
+        {
+          "title": "Subscription",
+          "name": "subscription",
+          "description": "Filters on a specific subscription of reports either ThreatScape or role based intel.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Cyber-Crime",
+            "Cyber-Espionage",
+            "Hacktivism",
+            "Cyber-Physical",
+            "Strategic",
+            "Fusion",
+            "Operational",
+            "Vulnerability",
+            "Standard"
+          ]
+        },
+        {
+          "title": "Report Type",
+          "name": "report_type",
+          "description": "Filter on a reportType, for multiple report types use.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Actor Name",
+          "name": "actor_name",
+          "description": "Filters the report results down to a specific actor, to return all matching reports for that actor.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Malware Name",
+          "name": "malware_name",
+          "description": "Filters the report results down to a specific malware family, to return all matching reports for that malware family.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "get_alerts",
+      "category": "investigation",
+      "annotation": "get_alerts",
+      "description": "Retrieves alerts from Mandiant Threat Intel based on the input parameters you have specified.",
+      "title": "Get Alerts",
+      "parameters": [
+        {
+          "title": "Created At",
+          "name": "added_after",
+          "description": "Created datetime from when you want to retrieve alerts from Mandiant Threat Intel.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Size",
+          "name": "length",
+          "description": "Number of results that you want this operation to return, per page, in the response. The maximum number of results per page is set items to 50.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Value should be between 1 to 1000.",
+          "value": 50
+        },
+        {
+          "title": "ID",
+          "name": "id",
+          "description": "STIX ID of the alert object based on which you want to retrieve alerts from Mandiant Threat Intel.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Alert Type",
+          "name": "alert_type",
+          "description": "Filters on a specific alerts sources.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Forum_Post",
+            "Tweet",
+            "Web_Content_Publish",
+            "Paste",
+            "Email_Analysis",
+            "Domain_Discovery",
+            "Document_Analysis"
+          ]
+        },
+        {
+          "title": "Alert Status",
+          "name": "alert_status",
+          "description": "Filters on a specific alerts status.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "New",
+            "New_Requested",
+            "Investigated",
+            "Under_Investigation",
+            "Closed",
+            "Closed_Investigated"
+          ]
+        },
+        {
+          "title": "Alert Categories",
+          "name": "alert_categories",
+          "description": "Filters on a specific category of alerts.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Social-Media",
+            "Forums",
+            "Documents",
+            "Malware-Repository",
+            "Network-Indicators",
+            "Web-Content",
+            "Paste-Sites"
+          ]
+        },
+        {
+          "title": "Alert Severity",
+          "name": "alert_severity",
+          "description": "Filters down to the alert severity the user wants to receive.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ]
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "search_collections",
+      "category": "investigation",
+      "annotation": "search_collections",
+      "description": "Retrieves collections from Mandiant Threat Intel based on the input parameters you have specified.",
+      "title": "Search Collections",
+      "parameters": [
+        {
+          "title": "Queries",
+          "name": "queries",
+          "description": "Queries is the list of Query Objects. Each query object includes the type and query properties.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": [
+            {
+              "type": "malware",
+              "query": "created='2022-01-20T17:39:05.101Z'"
+            }
+          ]
+        },
+        {
+          "title": "Include Connected Objects",
+          "name": "include_connected_objects",
+          "description": "Indicates whether objects connected to matching objects, through a reference or relationship, will be included in the search response.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false
+        },
+        {
+          "title": "Connected Objects",
+          "name": "connected_objects",
+          "description": "Lists all connections, which all contain following fields like connection_type, connected_type, object_type, property, or relationship_type",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": [
+            {
+              "connection_type": "relationship",
+              "connected_type": "source",
+              "object_type": "threat-actor",
+              "property": "objects"
+            }
+          ]
+        },
+        {
+          "title": "Sort By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort_by",
+          "description": "Sort By specifies the property of the object on which results are to be sorted. Sort By is applicable only when the include_connected_object flag is set to false.",
+          "tooltip": "Sort By specifies the property of the object on which results are to be sorted. Sort By is applicable only when the include_connected_object flag is set to false."
+        },
+        {
+          "title": "Order By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort_order",
+          "description": "This field specifies the direction of sort. Sort order can be set to \"asc\" (ascending) or \"desc\" (descending). If the sort order is not specified, it will default to ascending. Note that the sort_order is only applicable when the include_connected_object flag is set to false.",
+          "tooltip": "This field specifies the direction of sort. Sort order can be set to \"asc\" (ascending) or \"desc\" (descending). If the sort order is not specified, it will default to ascending. Note that the sort_order is only applicable when the include_connected_object flag is set to false."
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    }
+  ]
+}
