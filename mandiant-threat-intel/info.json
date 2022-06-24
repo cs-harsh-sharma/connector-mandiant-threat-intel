@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "label": "Mandiant Threat Intelligence",
   "category": "Threat Intelligence",
-  "description": "",
+  "description": "Mandiant Threat Intelligence provides automated access to indicators of compromise (IOCs) — IP addresses, domain names, URLs threat actors are using, via the indicators, allows access to full length finished intelligence in the reports, allows for notificaiton of threats to brand and keyword monitoring via the alerts, and finally allows searching for intelligence on the adversary with the search. This connector facilitates automated operations such as indicators, reports, alerts, and search collections.",
   "publisher": "Community",
   "cs_approved": false,
   "cs_compatible": true,
@@ -104,7 +104,114 @@
           ]
         }
       ],
-      "output_schema": {},
+      "output_schema": {
+        "spec_version": "",
+        "objects": [
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "definition_type": "",
+            "definition": {
+              "tlp": ""
+            }
+          },
+          {
+            "external_references": [
+              {
+                "source_name": "",
+                "external_id": "",
+                "description": ""
+              }
+            ],
+            "object_marking_refs": [],
+            "id": "",
+            "name": "",
+            "type": "",
+            "created": "",
+            "modified": "",
+            "malware_types": [],
+            "is_family": "",
+            "labels": [],
+            "revoked": "",
+            "spec_version": ""
+          },
+          {
+            "object_marking_refs": [],
+            "id": "",
+            "name": "",
+            "type": "",
+            "created": "",
+            "modified": "",
+            "revoked": "",
+            "identity_class": "",
+            "lang": "",
+            "spec_version": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "definition_type": "",
+            "definition": {
+              "tlp": ""
+            }
+          },
+          {
+            "id": "",
+            "source_ref": "",
+            "target_ref": "",
+            "type": "",
+            "created": "",
+            "modified": "",
+            "revoked": "",
+            "relationship_type": "",
+            "spec_version": ""
+          },
+          {
+            "x_fireeye_com_metadata": {
+              "subscriptions": []
+            },
+            "indicator_types": [],
+            "pattern_type": "",
+            "object_marking_refs": [],
+            "id": "",
+            "type": "",
+            "created": "",
+            "modified": "",
+            "revoked": "",
+            "valid_from": "",
+            "confidence": "",
+            "pattern": "",
+            "labels": [],
+            "valid_until": "",
+            "spec_version": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "created_by_ref": "",
+            "definition_type": "",
+            "spec_version": "",
+            "definition": {
+              "statement": ""
+            }
+          },
+          {
+            "object_marking_refs": [],
+            "id": "",
+            "name": "",
+            "type": "",
+            "created": "",
+            "modified": "",
+            "identity_class": "",
+            "spec_version": ""
+          }
+        ],
+        "id": "",
+        "type": ""
+      },
       "enabled": true
     },
     {
@@ -191,10 +298,39 @@
           "title": "Report Type",
           "name": "report_type",
           "description": "Filter on a reportType, for multiple report types use.",
-          "type": "text",
+          "type": "multiselect",
           "visible": true,
           "editable": true,
-          "required": false
+          "required": false,
+          "options": [
+            "Actor Overview",
+            "Actor Profile",
+            "Country Profile",
+            "Credit Card Shop Report",
+            "Event Coverage/Implication",
+            "Executive Perspective",
+            "FireEye Labs Research",
+            "Horizons",
+            "ICS Security Roundup",
+            "Industry Intelligence Quarterly",
+            "Industry Reporting",
+            "Malicious Activity Report",
+            "Malware Overview",
+            "Malware Profile",
+            "Malware Quarterly Industry Report",
+            "Net Assessment",
+            "Network Activity Reports",
+            "Operational Net-Assessment",
+            "TTP Deep Dive",
+            "Tactical Threat Report",
+            "Targeted Malware Lures",
+            "Threat Activity Alert",
+            "Threat Activity Report",
+            "Trends and Forecasting",
+            "Vulnerability",
+            "Vulnerability Report",
+            "Weekly Vulnerability Exploitation Report"
+          ]
         },
         {
           "title": "Actor Name",
@@ -215,7 +351,39 @@
           "required": false
         }
       ],
-      "output_schema": {},
+      "output_schema": {
+        "id": "",
+        "type": "",
+        "objects": [
+          {
+            "type": "",
+            "spec_version": "",
+            "id": "",
+            "created_by_ref": "",
+            "created": "",
+            "modified": "",
+            "name": "",
+            "description": "",
+            "report_types": [],
+            "published": "",
+            "object_marking_refs": [],
+            "x_fireeye_com_additional_description_sections": {
+              "analysis": [],
+              "key_points": []
+            },
+            "object_refs": [],
+            "x_fireeye_com_tracking_info": {
+              "document_version": "",
+              "current_release_date": "",
+              "document_id": ""
+            },
+            "x_fireeye_com_metadata": {
+              "product_type": [],
+              "subscriptions": []
+            }
+          }
+        ]
+      },
       "enabled": true
     },
     {
@@ -323,7 +491,52 @@
           ]
         }
       ],
-      "output_schema": {},
+      "output_schema": {
+        "spec_version": "",
+        "objects": [
+          {
+            "id": "",
+            "type": "",
+            "alert_type": "",
+            "name": "",
+            "status": "",
+            "alert_context": [],
+            "prerequisite_conditions": [],
+            "object_refs": [],
+            "action_nature": "",
+            "description": "",
+            "created": "",
+            "modified": "",
+            "alert_severity": {
+              "severity_score": ""
+            },
+            "spec_version": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "created_by_ref": "",
+            "definition_type": "",
+            "definition": {
+              "statement": ""
+            },
+            "spec_version": ""
+          },
+          {
+            "id": "",
+            "name": "",
+            "type": "",
+            "identity_class": "",
+            "created": "",
+            "modified": "",
+            "object_marking_refs": [],
+            "spec_version": ""
+          }
+        ],
+        "id": "",
+        "type": ""
+      },
       "enabled": true
     },
     {

@@ -29,7 +29,7 @@ def make_rest_call(endpoint, method, connector_info, config, data=None, params=N
         logger.debug("Endpoint URL: {0}".format(url))
         headers = {'Content-Type': 'application/json',
                    'Accept': 'application/vnd.oasis.stix+json; version=2.1',
-                   'X-App-Name': '',
+                   'X-App-Name': 'fortisoar.fortinet.v1.0',
                    'Authorization': token}
         logger.debug("Headers: {0}".format(headers))
         response = requests.request(method, url, headers=headers, verify=co.verify_ssl, data=data, params=params)
@@ -118,7 +118,7 @@ def get_reports(config, params, connector_info):
             'match.status': status.lower() if status else '',
             'match.document_id': params.get('document_id'),
             'match.subscription': subscription.lower() if subscription else '',
-            'match.report_type': report_type.split(",") if report_type else '',
+            'match.report_type': report_type if report_type else '',
             'match.actor_name': params.get('actor_name'),
             'match.malware_name': params.get('malware_name')
         }
