@@ -35,7 +35,6 @@ class MandiantAuth:
             self.host = "{0}".format(self.host)
         else:
             self.host = "https://{0}".format(self.host)
-        self.refresh_token = ""
 
     def convert_ts_epoch(self, ts):
         datetime_object = datetime.strptime(ctime(ts), "%a %b %d %H:%M:%S %Y")
