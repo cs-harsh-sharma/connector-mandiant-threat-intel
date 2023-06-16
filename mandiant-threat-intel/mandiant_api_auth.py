@@ -7,20 +7,11 @@
 import requests, json
 from requests.auth import HTTPBasicAuth
 from time import time, ctime
-from os import path
 from datetime import datetime
-from configparser import RawConfigParser
-from base64 import b64encode
+from connectors.core.utils import update_connnector_config
 from connectors.core.connector import get_logger, ConnectorError
 
 logger = get_logger('mandiant-threat-intel')
-
-CONFIG_SUPPORTS_TOKEN = True
-try:
-    from connectors.core.utils import update_connnector_config
-except:
-    CONFIG_SUPPORTS_TOKEN = False
-    configfile = path.join(path.dirname(path.abspath(__file__)), 'config.conf')
 
 
 class MandiantAuth:
@@ -40,13 +31,6 @@ class MandiantAuth:
         datetime_object = datetime.strptime(ctime(ts), "%a %b %d %H:%M:%S %Y")
         return datetime_object.timestamp()
 
-    def encode_token(self, token):
-        try:
-            token = token.encode('UTF-8')
-            return b64encode(token)
-        except Exception as err:
-            logger.error(err)
-
     def generate_token(self):
         try:
             token_resp = acquire_token(self)
@@ -59,56 +43,6 @@ class MandiantAuth:
         except Exception as err:
             logger.error("{0}".format(err))
             raise ConnectorError("{0}".format(err))
-
-    def write_config(self, token_resp, config, section_header):
-        time_key = ['expiresOn']
-        token_key = ['accessToken']
-
-        config.add_section(section_header)
-        for key, val in token_resp.items():
-            if key not in time_key and key not in token_key:
-                config.set(section_header, str(key), str(val))
-        for key in time_key:
-            config.set(section_header, str(key), self.convert_ts_epoch(token_resp['expiresOn']))
-        for key in token_key:
-            config.set(section_header, str(key), self.encode_token(token_resp[key]).decode('utf-8'))
-
-        try:
-            with open(configfile, 'w') as fobj:
-                config.write(fobj)
-                fobj.close()
-            return config
-        except Exception as err:
-            logger.error("{0}".format(str(err)))
-            raise ConnectorError("{0}".format(str(err)))
-
-    def handle_config(self, section_header, flag=False):
-        # Lets setup the config parser.
-        config = RawConfigParser()
-        try:
-            if path.exists(configfile) is False:
-                token_resp = self.generate_token()
-                return self.write_config(token_resp, config, section_header)
-            else:
-                # Read existing config
-                config.read(configfile)
-                # Check for user
-                if not config.has_section(section_header) and not flag:
-                    # Write new config
-                    token_resp = self.generate_token()
-                    return self.write_config(token_resp, config, section_header)
-                else:
-                    if flag:
-                        config.remove_section(section_header)
-                        with open(configfile, "w") as f:
-                            config.write(f)
-                    else:
-                        config.read(config)
-                return config
-
-        except Exception as err:
-            logger.error("Handle_config:Failure {0}".format(str(err)))
-            raise ConnectorError(str(err))
 
     def validate_token(self, connector_config, connector_info):
         try:
@@ -172,16 +106,15 @@ def acquire_token(self):
 def check(config, connector_info):
     try:
         co = MandiantAuth(config)
-        if CONFIG_SUPPORTS_TOKEN:
-            if not 'accessToken' in config:
-                token_resp = co.generate_token()
-                config['accessToken'] = token_resp.get('accessToken')
-                config['expiresOn'] = token_resp.get('expiresOn')
-                update_connnector_config(connector_info['connector_name'], connector_info['connector_version'], config,
-                                         config['config_id'])
-                return True
-            else:
-                token_resp = co.validate_token(config, connector_info)
-                return True
+        if not 'accessToken' in config:
+            token_resp = co.generate_token()
+            config['accessToken'] = token_resp.get('accessToken')
+            config['expiresOn'] = token_resp.get('expiresOn')
+            update_connnector_config(connector_info['connector_name'], connector_info['connector_version'], config,
+                                     config['config_id'])
+            return True
+        else:
+            token_resp = co.validate_token(config, connector_info)
+            return True
     except Exception as err:
         raise ConnectorError(str(err))

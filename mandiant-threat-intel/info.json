@@ -1,16 +1,28 @@
 {
   "name": "mandiant-threat-intel",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "label": "Mandiant Threat Intelligence",
   "category": "Threat Intelligence",
-  "description": "Mandiant Threat Intelligence provides automated access to indicators of compromise (IOCs) — IP addresses, domain names, URLs threat actors are using, via the indicators, allows access to full length finished intelligence in the reports, allows for notificaiton of threats to brand and keyword monitoring via the alerts, and finally allows searching for intelligence on the adversary with the search. This connector facilitates automated operations such as indicators, reports, alerts, and search collections.",
-  "publisher": "Community",
-  "cs_approved": false,
+  "description": "Mandiant Threat Intelligence provides automated access to indicators of compromise (IOCs) — IP addresses, domain names, URLs threat actors are using, via the indicators, allows access to full length finished intelligence in the reports, allows for notificaiton of threats to brand and keyword monitoring via the alerts, and finally allows searching for intelligence on the adversary with the search. This connector facilitates automated operations such as indicators, reports, alerts, and search collections.<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
   "cs_compatible": true,
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/mandiant-threat-intelligence/300/mandiant-threat-intelligence-v1-0-0",
+  "help_online": "",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "ingestion_supported": false,
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "tags": [
+    "ThreatIntel"
+  ],
+  "ingestion_preferences": {
+    "modules": [
+      "threat_intel_feeds",
+      "indicators"
+    ]
+  },
   "configuration": {
     "fields": [
       {
@@ -105,112 +117,117 @@
         }
       ],
       "output_schema": {
-        "spec_version": "",
+        "id": "",
+        "type": "",
         "objects": [
           {
             "id": "",
+            "name": "",
             "type": "",
-            "created": "",
-            "definition_type": "",
-            "definition": {
-              "tlp": ""
-            }
-          },
-          {
-            "external_references": [
-              {
-                "source_name": "",
-                "external_id": "",
-                "description": ""
-              }
+            "labels": [
             ],
-            "object_marking_refs": [],
-            "id": "",
-            "name": "",
-            "type": "",
             "created": "",
+            "revoked": "",
             "modified": "",
-            "malware_types": [],
             "is_family": "",
-            "labels": [],
-            "revoked": "",
-            "spec_version": ""
+            "description": "",
+            "spec_version": "",
+            "malware_types": [
+            ],
+            "object_marking_refs": [
+            ]
           },
           {
-            "object_marking_refs": [],
             "id": "",
-            "name": "",
             "type": "",
             "created": "",
+            "revoked": "",
             "modified": "",
-            "revoked": "",
-            "identity_class": "",
-            "lang": "",
-            "spec_version": ""
-          },
-          {
-            "id": "",
-            "type": "",
-            "created": "",
-            "definition_type": "",
-            "definition": {
-              "tlp": ""
-            }
-          },
-          {
-            "id": "",
             "source_ref": "",
             "target_ref": "",
-            "type": "",
-            "created": "",
-            "modified": "",
-            "revoked": "",
-            "relationship_type": "",
-            "spec_version": ""
-          },
-          {
-            "x_fireeye_com_metadata": {
-              "subscriptions": []
-            },
-            "indicator_types": [],
-            "pattern_type": "",
-            "object_marking_refs": [],
-            "id": "",
-            "type": "",
-            "created": "",
-            "modified": "",
-            "revoked": "",
-            "valid_from": "",
-            "confidence": "",
-            "pattern": "",
-            "labels": [],
-            "valid_until": "",
-            "spec_version": ""
-          },
-          {
-            "id": "",
-            "type": "",
-            "created": "",
-            "created_by_ref": "",
-            "definition_type": "",
             "spec_version": "",
-            "definition": {
-              "statement": ""
+            "relationship_type": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "revoked": "",
+            "modified": "",
+            "source_ref": "",
+            "target_ref": "",
+            "spec_version": "",
+            "relationship_type": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "labels": [
+            ],
+            "created": "",
+            "pattern": "",
+            "revoked": "",
+            "modified": "",
+            "confidence": "",
+            "valid_from": "",
+            "valid_until": "",
+            "pattern_type": "",
+            "spec_version": "",
+            "indicator_types": [
+            ],
+            "object_marking_refs": [
+            ],
+            "x_fireeye_com_metadata": {
+              "subscriptions": [
+              ]
             }
           },
           {
-            "object_marking_refs": [],
+            "id": "",
+            "name": "",
+            "type": "",
+            "labels": [
+            ],
+            "created": "",
+            "revoked": "",
+            "modified": "",
+            "spec_version": "",
+            "infrastructure_types": [
+            ]
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "definition": {
+              "tlp": ""
+            },
+            "definition_type": ""
+          },
+          {
+            "id": "",
+            "type": "",
+            "created": "",
+            "definition": {
+              "statement": ""
+            },
+            "spec_version": "",
+            "created_by_ref": "",
+            "definition_type": ""
+          },
+          {
             "id": "",
             "name": "",
             "type": "",
             "created": "",
             "modified": "",
+            "spec_version": "",
             "identity_class": "",
-            "spec_version": ""
+            "object_marking_refs": [
+            ]
           }
         ],
-        "id": "",
-        "type": ""
+        "spec_version": ""
       },
       "enabled": true
     },
@@ -617,6 +634,83 @@
         }
       ],
       "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "fetch_indicators",
+      "category": "investigation",
+      "annotation": "fetch_indicators",
+      "description": "Retrieves all indicators or specific indicators from Mandiant Threat Intelligence based on the input parameters you have specified.",
+      "title": "Fetch Indicators",
+      "parameters": [
+        {
+          "title": "Created At",
+          "name": "added_after",
+          "description": "Specify the DateTime when the indicators were created in Mandiant Threat Intelligence, and from when you want to retrieve indicators from Mandiant Threat Intelligence.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Size",
+          "name": "length",
+          "description": "Specify the number of results, per page, that you want to include in the response of this operation. The maximum number of results per page is set to 50 items.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Value should be between 1 to 1000.",
+          "value": 50
+        },
+        {
+          "title": "STIX UUID",
+          "name": "id",
+          "description": "Specify the STIX ID of the alert object based on which you want to retrieve indicators from Mandiant Threat Intelligence.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "description": "Select the status of the indicator based on which you want to filter the indicators retrieved from Mandiant Threat Intelligence. You can choose between Active or Revoked.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "Active",
+            "Revoked"
+          ]
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "type": "",
+        "objects": [
+          {
+            "id": "",
+            "type": "",
+            "labels": [],
+            "created": "",
+            "pattern": "",
+            "revoked": "",
+            "modified": "",
+            "confidence": "",
+            "valid_from": "",
+            "pattern_type": "",
+            "spec_version": "",
+            "indicator_types": [],
+            "object_marking_refs": [],
+            "x_fireeye_com_metadata": {
+              "subscriptions": []
+            }
+          }
+        ],
+        "spec_version": ""
+      },
       "enabled": true
     }
   ]

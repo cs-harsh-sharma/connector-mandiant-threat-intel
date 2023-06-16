@@ -34,12 +34,11 @@ def make_rest_call(endpoint, method, connector_info, config, data=None, params=N
         logger.debug("Headers: {0}".format(headers))
         response = requests.request(method, url, headers=headers, verify=co.verify_ssl, data=data, params=params)
         logger.debug("Response: {0}".format(response))
-        if response.ok or response.status_code == 204:
+        if response.status_code == 200:
             logger.info('Successfully got response for url {0}'.format(url))
-            if 'json' in str(response.headers):
-                return response.json()
-            else:
-                return response.content
+            return response.json()
+        elif response.status_code == 204:
+            return dict()
         else:
             raise ConnectorError("{0}".format(errors.get(response.status_code)))
     except requests.exceptions.SSLError:
@@ -97,6 +96,41 @@ def get_indicators(config, params, connector_info):
         response = make_rest_call(endpoint, 'GET', connector_info, config, params=payload)
         logger.debug("Response: {0}".format(response))
         return response
+    except Exception as err:
+        logger.exception("{0}".format(str(err)))
+        raise ConnectorError("{0}".format(str(err)))
+
+
+def extract_indicators(response, indicators):
+    for ind in response:
+        if ind.get('type') == 'indicator':
+            indicators.append(ind)
+    return indicators
+
+
+def fetch_indicators(config, params, connector_info):
+    try:
+        indicators = []
+        endpoint = "/collections/indicators/objects"
+        added_after = params.get('added_after')
+        if 'T' in added_after:
+            added_after = convert_datetime_to_epoch(added_after)
+        status = params.get('status')
+        payload = {
+            'added_after': added_after,
+            'length': params.get('length'),
+            'match.id': params.get('id'),
+            'match.status': status.lower() if status else ''
+        }
+        payload = build_payload(payload)
+        logger.debug("Payload: {0}".format(payload))
+        response = make_rest_call(endpoint, 'GET', connector_info, config, params=payload)
+        logger.debug("Response: {0}".format(response))
+        if bool(response):
+            extract_indicators(response.get('objects'), indicators)
+            response['objects'] = indicators
+            return response
+        return {"objects": []}
     except Exception as err:
         logger.exception("{0}".format(str(err)))
         raise ConnectorError("{0}".format(str(err)))
@@ -191,6 +225,7 @@ def _check_health(config, connector_info):
 
 operations = {
     'get_indicators': get_indicators,
+    'fetch_indicators': fetch_indicators,
     'get_reports': get_reports,
     'get_alerts': get_alerts,
     'search_collections': search_collections
