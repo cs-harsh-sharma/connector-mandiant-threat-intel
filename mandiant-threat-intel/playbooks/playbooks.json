@@ -810,7 +810,7 @@
                 "resource": {
                   "tLP": "{{vars.tlp_resolved}}",
                   "label": "{{vars.item.labels}}",
-                  "value": "{% if vars.item.pattern and vars.item.pattern.split(':')[0][1:] == 'file' %} {{vars.item.pattern.split('OR')[0].split('=')[1][1:-2]}} {% elif vars.item.pattern %} {{vars.item.pattern.split('=')[1][1:-2]}} {% endif %}",
+                  "value": "{% if vars.item.pattern and vars.item.pattern.split(':')[0][1:] == 'file' %} {{vars.item.pattern.split('OR')[0].split('=')[1][1:-2]}} {% elif vars.item.pattern %} {{vars.item.pattern.split(\"'\")[1]}} {% endif %}",
                   "source": "Mandiant Threat Intel",
                   "created": "{% if vars.item.created %}{{arrow.get(vars.item.created).int_timestamp}}{% endif %}",
                   "pattern": "{{vars.item.pattern}}",
