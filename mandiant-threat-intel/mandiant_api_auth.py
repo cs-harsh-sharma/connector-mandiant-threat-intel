@@ -80,7 +80,7 @@ def acquire_token(self):
         endpoint = self.host + '/token'
         logger.debug("Endpoint: {0}".format(endpoint))
         response = requests.post(endpoint, auth=HTTPBasicAuth(self.public_key, self.private_key), data=data,
-                                 verify=self.verify_ssl)
+                                 verify=self.verify_ssl, timeout=30)
         logger.debug("Response: {0}".format(response))
         if response.status_code in [200, 204, 201]:
             return response.json()

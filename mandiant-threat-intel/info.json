@@ -575,13 +575,8 @@
           "type": "json",
           "visible": true,
           "editable": true,
-          "required": false,
-          "placeholder": [
-            {
-              "type": "malware",
-              "query": "created='2022-01-20T17:39:05.101Z'"
-            }
-          ]
+          "required": true,
+          "tooltip": "Specify the queries using which you want to retrieve the list of Query Objects from Mandiant Threat Intelligence. Each query object includes its type and properties. For e.g. [{\"type\": \"malware\",\"query\": \"created='2022-01-20T17:39:05.101Z'\"}]"
         },
         {
           "title": "Include Connected Objects",
@@ -602,15 +597,7 @@
           "visible": true,
           "editable": true,
           "required": false,
-          "tooltip": "Specify the list of all connections using which you want to retrieve connected objects from Mandiant Threat Intelligence. Connections contain fields such as, connection_type, connected_type, object_type, property, or relationship_type.",
-          "placeholder": [
-            {
-              "connection_type": "relationship",
-              "connected_type": "source",
-              "object_type": "threat-actor",
-              "property": "objects"
-            }
-          ]
+          "tooltip": "Specify the list of all connections using which you want to retrieve connected objects from Mandiant Threat Intelligence. Connections contain fields such as, connection_type, connected_type, object_type, property, or relationship_type. For e.g [{\"connection_type\":\"reference\"}]"
         },
         {
           "title": "Sort By",
