@@ -7,7 +7,7 @@
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/mandiant-threat-intelligence/650/mandiant-threat-intelligence-v1-1-0",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "ingestion_supported": true,
@@ -113,7 +113,8 @@
           "options": [
             "Active",
             "Revoked"
-          ]
+          ],
+          "tooltip": "Select the status of the indicator based on which you want to filter the indicators retrieved from Mandiant Threat Intelligence. You can choose between Active or Revoked."
         }
       ],
       "output_schema": {
@@ -291,7 +292,8 @@
           "options": [
             "Active",
             "Revoked"
-          ]
+          ],
+          "tooltip": "Select the status of the report based on which you want to filter the reports retrieved from Mandiant Threat Intelligence. You can choose between Active or Revoked."
         },
         {
           "title": "Subscription",
