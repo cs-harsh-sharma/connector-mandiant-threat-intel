@@ -246,7 +246,7 @@
           "type": "datetime",
           "visible": true,
           "editable": true,
-          "required": false
+          "required": true
         },
         {
           "title": "Size",
