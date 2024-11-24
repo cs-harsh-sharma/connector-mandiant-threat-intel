@@ -1,4 +1,5 @@
-#### Following enhancements have been made to the Mandiant Threat Intelligence Connector in version 1.1.0:
+#### What's Improved
 
-- This connector version is now certified.
-- The connector now supports data ingestion using the Data Ingestion Wizard.
+Following enhancements have been made to the Mandiant Threat Intelligence Connector in version 1.2.0: 
+
+- Added a new action Get Indicator Reputation.

@@ -1,5 +1,5 @@
 """ Copyright start
-  Copyright (C) 2008 - 2022 Fortinet Inc.
+  Copyright (C) 2008 - 2024 Fortinet Inc.
   All rights reserved.
   FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
   Copyright end """
@@ -28,7 +28,7 @@ def make_rest_call(endpoint, method, connector_info, config, data=None, params=N
         logger.debug("Token: {0}".format(token))
         logger.debug("Endpoint URL: {0}".format(url))
         headers = {'Content-Type': 'application/json',
-                   'Accept': 'application/vnd.oasis.stix+json; version=2.1',
+                   'Accept': 'application/json',
                    'X-App-Name': 'fortisoar.fortinet.v1.0',
                    'Authorization': token}
         logger.debug("Headers: {0}".format(headers))
@@ -39,6 +39,8 @@ def make_rest_call(endpoint, method, connector_info, config, data=None, params=N
             return response.json()
         elif response.status_code == 204:
             return dict()
+        elif response.status_code == 404:
+            return {"Message": "Not Found", "http_status": "404"}
         else:
             raise ConnectorError("{0}".format(errors.get(response.status_code)))
     except requests.exceptions.SSLError:
@@ -129,6 +131,30 @@ def fetch_indicators(config, params, connector_info):
         if bool(response):
             extract_indicators(response.get('objects'), indicators)
             response['objects'] = indicators
+            return response
+        return {"objects": []}
+    except Exception as err:
+        logger.exception("{0}".format(str(err)))
+        raise ConnectorError("{0}".format(str(err)))
+
+
+def get_reputation_of_indicators(config, params, connector_info):
+    try:
+        #indicator_type = params.get('indicatorType')
+        indicator_value = params.get('indicatorValue')
+        #endpoint = "/v4/indicator/{0}/{1}".format(indicator_type,indicator_value)
+        tempList = []
+        tempList.append(indicator_value)
+        endpoint = "/v4/indicator"
+        data = {'requests': [{'values': tempList}]}
+        jsonData = json.dumps(data)
+        logger.debug("JSONDATA: {0}".format(jsonData))
+        #response = make_rest_call(endpoint, 'GET', connector_info, config)
+        response = make_rest_call(endpoint, 'POST', connector_info, config, data=jsonData)
+        logger.debug("Response: {0}".format(response))
+        if bool(response):
+            #extract_indicators(response.get('objects'), indicators)
+            #response['objects'] = indicators
             return response
         return {"objects": []}
     except Exception as err:
@@ -229,4 +255,5 @@ operations = {
     'get_reports': get_reports,
     'get_alerts': get_alerts,
     'search_collections': search_collections
+    'get_reputation_of_indicators': get_reputation_of_indicators
 }
