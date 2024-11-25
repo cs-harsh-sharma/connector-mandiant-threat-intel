@@ -140,21 +140,16 @@ def fetch_indicators(config, params, connector_info):
 
 def get_reputation_of_indicators(config, params, connector_info):
     try:
-        #indicator_type = params.get('indicatorType')
         indicator_value = params.get('indicatorValue')
-        #endpoint = "/v4/indicator/{0}/{1}".format(indicator_type,indicator_value)
         tempList = []
         tempList.append(indicator_value)
         endpoint = "/v4/indicator"
         data = {'requests': [{'values': tempList}]}
         jsonData = json.dumps(data)
         logger.debug("JSONDATA: {0}".format(jsonData))
-        #response = make_rest_call(endpoint, 'GET', connector_info, config)
         response = make_rest_call(endpoint, 'POST', connector_info, config, data=jsonData)
         logger.debug("Response: {0}".format(response))
         if bool(response):
-            #extract_indicators(response.get('objects'), indicators)
-            #response['objects'] = indicators
             return response
         return {"objects": []}
     except Exception as err:
