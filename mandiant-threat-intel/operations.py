@@ -1,8 +1,9 @@
-""" Copyright start
-  Copyright (C) 2008 - 2024 Fortinet Inc.
-  All rights reserved.
-  FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
-  Copyright end """
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
 
 from .mandiant_api_auth import *
 from connectors.core.connector import get_logger, ConnectorError
@@ -236,6 +237,21 @@ def search_collections(config, params, connector_info):
         raise ConnectorError("{0}".format(str(err)))
 
 
+def execute_an_api_call(config, params, connector_info):
+    try:
+        endpoint = params.get("endpoint")
+        http_method = params.get("method")
+        query_params = params.get("query_params") if params.get("query_params") else None
+        payload = json.dumps(params.get("payload")) if params.get("payload") else None
+        logger.debug("Payload: {0}".format(payload))
+        response = make_rest_call(endpoint, http_method, connector_info, config, params=query_params, data=payload)
+        logger.debug("Response: {0}".format(response))
+        return response
+    except Exception as err:
+        logger.exception("{0}".format(str(err)))
+        raise ConnectorError("{0}".format(str(err)))
+
+
 def _check_health(config, connector_info):
     try:
         return check(config, connector_info)
@@ -249,6 +265,7 @@ operations = {
     'fetch_indicators': fetch_indicators,
     'get_reports': get_reports,
     'get_alerts': get_alerts,
-    'search_collections': search_collections
-    'get_reputation_of_indicators': get_reputation_of_indicators
+    'search_collections': search_collections,
+    'get_reputation_of_indicators': get_reputation_of_indicators,
+    'execute_an_api_call': execute_an_api_call
 }

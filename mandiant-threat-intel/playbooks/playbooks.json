@@ -1096,6 +1096,82 @@
             "fetch",
             "mandiant-threat-intel"
           ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "dfe690e2-07df-4288-95c0-f7e57470a516",
+          "collection": "/api/3/workflow_collections/8a65035a-d913-4aa4-af29-c809a66000fe",
+          "triggerLimit": null,
+          "description": "Sends an API request to any Mandiant Threat Intelligence API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs. ",
+          "name": "Execute an API Request",
+          "tag": "#Mandiant Threat Intelligence",
+          "recordTags": [
+            "mandiant-threat-intel"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/71a56c30-ea0e-46fb-b971-1f781e2cd9be",
+          "steps": [
+            {
+              "uuid": "71a56c30-ea0e-46fb-b971-1f781e2cd9be",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "dd96c2ba-3460-4ee6-a486-d7b0c971c795",
+                "title": "Mandiant Threat Intelligence: Execute an API Request",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "9a802795-fa3d-43ad-a296-61d325c0e36a",
+              "@type": "WorkflowStep",
+              "name": "Execute an API Request",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Mandiant Threat Intelligence",
+                "config": "''",
+                "params": [],
+                "version": "1.2.0",
+                "connector": "mandiant-threat-intel",
+                "operation": "execute_an_api_call",
+                "operationTitle": "Execute an API Request"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "914b235f-dd80-4f87-87f6-72005cb5e827",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Execute an API Request",
+              "sourceStep": "/api/3/workflow_steps/71a56c30-ea0e-46fb-b971-1f781e2cd9be",
+              "targetStep": "/api/3/workflow_steps/9a802795-fa3d-43ad-a296-61d325c0e36a"
+            }
+          ]
         }
       ]
     }
