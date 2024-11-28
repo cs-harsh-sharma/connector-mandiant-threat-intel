@@ -190,7 +190,7 @@
               "targetStep": "/api/3/workflow_steps/3e72643f-d03a-4a20-abc9-5a865bec70fa"
             }
           ]
-        }
+        },
         {
           "@type": "Workflow",
           "triggerLimit": null,
